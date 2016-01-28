@@ -48,12 +48,12 @@ namespace XOcsatt.Entities.Schedules
         /// <param name="begin">The beginning time of the interval</param>
         /// <param name="end">The end time of the interval</param>
         /// <param name="List">The list to add times to.</param>
-        public IEnumerable<DateTime> AddEventsInInterval(DateTime begin, DateTime end)
+        public IEnumerable<DateTime> GetEventsInInterval(DateTime begin, DateTime end)
         {
             List<DateTime> agenda = new List<DateTime>();
 
             foreach (IScheduledItem st in this.Agenda)
-                agenda.AddRange(st.AddEventsInInterval(begin, end));
+                agenda.AddRange(st.GetEventsInInterval(begin, end));
 
             agenda.Sort();
 

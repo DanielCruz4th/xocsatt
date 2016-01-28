@@ -24,7 +24,7 @@ namespace XOcsatt.Entities.Schedules
         }
         #region IScheduledItem Members
 
-        public IEnumerable<DateTime> AddEventsInInterval(DateTime begin, DateTime end)
+        public IEnumerable<DateTime> GetEventsInInterval(DateTime begin, DateTime end)
         {
             List<DateTime> agenda = new List<DateTime>();
 

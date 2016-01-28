@@ -41,7 +41,7 @@ namespace XOcsatt.Entities.Schedules
             _end = new ScheduledTime(timeBase, endOffset);
         }
 
-        public IEnumerable<DateTime> AddEventsInInterval(DateTime begin, DateTime end)
+        public IEnumerable<DateTime> GetEventsInInterval(DateTime begin, DateTime end)
         {
             List<DateTime> agenda = new List<DateTime>();
 

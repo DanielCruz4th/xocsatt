@@ -17,7 +17,7 @@ namespace XOcsatt.Entities.Schedules
 	}
 
 	/// <summary>
-	/// This class represents a simple schedule.  It can represent a repeating event that occurs anywhere from every
+	/// The ScheduledTime class represents a repeating event that occurs anywhere from every
 	/// second to once a month.  It consists of an enumeration to mark the interval and an offset from that interval.
 	/// For example new ScheduledTime(Hourly, new TimeSpan(0, 15, 0)) would represent an event that fired 15 minutes
 	/// after the hour every hour.
@@ -78,7 +78,7 @@ namespace XOcsatt.Entities.Schedules
             return int.Parse(Arr[i]);
         }
 
-        public IEnumerable<DateTime> AddEventsInInterval(DateTime Begin, DateTime End)
+        public IEnumerable<DateTime> GetEventsInInterval(DateTime Begin, DateTime End)
         {
             List<DateTime> agenda = new List<DateTime>();
 

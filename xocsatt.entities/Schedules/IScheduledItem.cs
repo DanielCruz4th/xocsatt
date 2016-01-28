@@ -19,7 +19,7 @@ namespace XOcsatt.Entities.Schedules
         /// <param name="begin">The beginning of the interval</param>
         /// <param name="end">The end of the interval</param>
         /// <returns>All events that occur in the given interval</returns>
-        IEnumerable<DateTime> AddEventsInInterval(DateTime begin, DateTime end);
+        IEnumerable<DateTime> GetEventsInInterval(DateTime begin, DateTime end);
 
         /// <summary>
         /// Returns the next run time of the scheduled item. Optionally excludes the starting time.
