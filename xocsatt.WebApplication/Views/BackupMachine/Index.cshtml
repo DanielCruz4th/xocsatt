@@ -1,0 +1,39 @@
+﻿@{
+    ViewBag.Title = "Backup Machines";
+}
+
+<ul>
+    @foreach (var item in Model)
+    {
+        <li>
+            <dl>
+                <dt>IP Address</dt>
+                <dd>@item.IPAddress</dd>
+                <dt>Enabled</dt>
+                <dd><input type="checkbox" class="enabled" checked="@item.Enabled" data-id="@item.ID" /></dd>
+                <dt>Created by</dt>
+                <dd>@item.CreatedBy</dd>
+                <dt>Created</dt>
+                <dd>@item.DateCreated</dd>
+                @if (item.LastUpdated != null) { 
+                <dt>Last updated by</dt>
+                <dd>@item.LastUpdatedBy</dd>
+                <dt>Last Updated</dt>
+                <dd>@item.LastUpdated</dd>
+                }
+            </dl>
+        </li>
+    }
+</ul>
+
+@section Scripts {
+    <script type="text/javascript">
+        $(function () {
+            $('input[type="checkbox"].enabled').on('click', function () {
+                $this = $(this);
+                console.log($this.data('id'));
+                console.log($this.is(':checked'));
+            });
+        });
+    </script>
+}

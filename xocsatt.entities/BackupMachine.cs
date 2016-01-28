@@ -172,5 +172,28 @@ namespace XOcsatt.Entities
         {
             throw new NotImplementedException();
         }
+
+        static public IEnumerable<BackupMachine> GetAll()
+        {
+            return GetBackupMachines(null, null, null);
+        }
+
+        static public IEnumerable<BackupMachine> GetBackupMachines(Guid? id, string ipAddress, bool? enabled)
+        {
+            List<BackupMachine> entities = new List<BackupMachine>();
+
+            using (var db = new BackupMachineContext("BackupMachineContextDb"))
+            {
+                var query = from m in db.BackupMachines
+                            where !id.HasValue || m.ID == id.Value
+                            where string.IsNullOrEmpty(ipAddress) || m.IPAddress == ipAddress
+                            where !enabled.HasValue || m.Enabled == enabled.Value
+                            select m;
+                
+                entities.AddRange(query);
+            }
+
+            return entities;
+        }
     }
 }
