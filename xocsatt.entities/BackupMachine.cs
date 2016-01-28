@@ -1,6 +1,7 @@
 ﻿using Rainbow.Web;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -145,22 +146,21 @@ namespace XOcsatt.Entities
 
         protected override void ValidationRules()
         {
-            throw new NotImplementedException();
         }
 
         protected override BackupMachine DataSelect(Guid id)
         {
-            throw new NotImplementedException();
+            return BackupMachine.GetBackupMachines(id, null, null).FirstOrDefault();
         }
 
         protected override void DataUpdate()
         {
-            throw new NotImplementedException();
+            BackupMachine.UpdateBackupMachine(this);
         }
 
         protected override void DataInsert()
         {
-            throw new NotImplementedException();
+            BackupMachine.InsertBackupMachine(this);
         }
 
         protected override void DataDelete()
@@ -176,6 +176,53 @@ namespace XOcsatt.Entities
         static public IEnumerable<BackupMachine> GetAll()
         {
             return GetBackupMachines(null, null, null);
+        }
+
+        internal static void InsertBackupMachine(BackupMachine entity)
+        {
+            if (entity == null)
+                throw new ArgumentNullException("entity");
+
+            using (var db = new BackupMachineContext("BackupMachineContextDb"))
+            {
+                db.BackupMachines.Add(entity);
+
+                db.SaveChanges();
+            }
+        }
+
+        internal static void DeleteBackupMachine(BackupMachine entity)
+        {
+            if (entity == null)
+                throw new ArgumentNullException("entity");
+
+            using (var db = new BackupMachineContext("BackupMachineContextDb"))
+            {
+                var item = db.BackupMachines.Find(entity.ID);
+
+                if (item == null)
+                    return;
+
+                db.BackupMachines.Remove(item);
+
+                db.SaveChanges();
+            }
+        }
+
+        internal static void UpdateBackupMachine(BackupMachine entity)
+        {
+            if (entity == null)
+                throw new ArgumentNullException("entity");
+
+            using (var db = new BackupMachineContext("BackupMachineContextDb"))
+            {
+                db.BackupMachines.Attach(entity);
+
+                var entry = db.Entry(entity);
+                entry.State = EntityState.Modified;
+
+                db.SaveChanges();
+            }
         }
 
         static public IEnumerable<BackupMachine> GetBackupMachines(Guid? id, string ipAddress, bool? enabled)
