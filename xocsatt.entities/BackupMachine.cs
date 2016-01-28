@@ -165,12 +165,28 @@ namespace XOcsatt.Entities
 
         protected override void DataDelete()
         {
-            throw new NotImplementedException();
+            BackupMachine.DeleteBackupMachine(this);
         }
 
         public bool Equals(BackupMachine other)
         {
-            throw new NotImplementedException();
+            if (other == null)
+                return false;
+
+            return this.ID == other.ID;
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj is BackupMachine)
+                return Equals((BackupMachine)obj);
+
+            return false;
+        }
+
+        public override int GetHashCode()
+        {
+            return this.ID.GetHashCode();
         }
 
         static public IEnumerable<BackupMachine> GetAll()
