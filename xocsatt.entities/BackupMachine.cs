@@ -9,6 +9,12 @@ namespace XOcsatt.Entities
 {
     public class BackupMachine : BusinessBase<BackupMachine, Guid>, IEquatable<BackupMachine>
     {
+        public BackupMachine()
+            : base(Guid.NewGuid())
+        {
+
+        }
+
         private string _ipAddress;
 
         public string IPAddress
@@ -135,6 +141,36 @@ namespace XOcsatt.Entities
                 if (changed)
                     MarkChanged("Enabled");
             }
+        }
+
+        protected override void ValidationRules()
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override BackupMachine DataSelect(Guid id)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void DataUpdate()
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void DataInsert()
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void DataDelete()
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Equals(BackupMachine other)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -14,6 +14,24 @@ namespace XOcsatt.Entities.Schedules
         private DateTime _startTime = DateTime.MinValue.RoundToSqlDateTime();
         private DateTime _endTime = DateTime.MaxValue.RoundToSqlDateTime();
 
+        public DateTime StartTime
+        {
+            get { return _startTime; }
+            set { _startTime = value; }
+        }
+
+        public DateTime EndTime
+        {
+            get { return _endTime; }
+            set { _endTime = value; }
+        }
+
+        public TimeSpan Interval
+        {
+            get { return _interval; }
+            set { _interval = value; }
+        }
+
         public SimpleInterval()
         {
         }
@@ -59,13 +77,20 @@ namespace XOcsatt.Entities.Schedules
         public DateTime NextRunTime(DateTime time, bool includeStartTime)
         {
             var _time = time.RoundToSqlDateTime();
-            var span = _time.RoundToSqlDateTime() - _startTime;
+            var span = _time - this.StartTime;
 
             if (span < TimeSpan.Zero)
-                return _startTime;
+                return this.StartTime;
 
-            return _time == _startTime && includeStartTime ? 
+            if (span == this.Interval)
+                return includeStartTime ? _time : _time + this.Interval;
 
+            var nextRun = _time + (this.Interval - span);
+
+            if (nextRun > this.EndTime)
+                return this.EndTime;
+
+            return nextRun;
         }
     }
 }

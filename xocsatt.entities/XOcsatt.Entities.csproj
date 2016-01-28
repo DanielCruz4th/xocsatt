@@ -40,9 +40,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BackupMachine.cs" />
+    <Compile Include="Schedules\BlockWrapper.cs" />
+    <Compile Include="Schedules\EventQueue.cs" />
     <Compile Include="Schedules\IScheduledItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Schedules\ScheduledTime.cs" />
     <Compile Include="Schedules\SimpleInterval.cs" />
+    <Compile Include="Schedules\SingleEvent.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Rainbow\Rainbow.Web.csproj">
